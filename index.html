@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="vendor/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="vendor/loader.css">
+    <title>Chromebook Loaners</title>
+  </head>
+  <body>
+    <div id="overlay"><div class="loader"></div></div>
+  	<div class="view" id="start">
+		<h1>Chromebook Loaner Check-In/Out</h1>
+		<div class="pure-g">
+		    <div class="pure-u-1-4"></div>
+		    <div class="pure-u-1-4">
+				<button class="pure-button button-secondary" id="start-check-out">Check out a loaner</button>
+		    </div>
+		    <div class="pure-u-1-4">
+				<button class="pure-button button-success" id="start-check-in">Check in a loaner</button>
+		    </div>
+		    <div class="pure-u-1-4"></div>
+		</div>
+	</div>
+	<div class="view" id="check-in">
+		<button class="pure-button back-button">Back</button>
+		<form class="pure-form pure-form-aligned" id="check-in-form" autocomplete="off">
+		    <fieldset>
+		        <legend>Chromebook Check-In Form</legend>
+
+		        <label for="checkin-email" autocomplete="off">Email</label>
+		        <input id="checkin-email" type="text" placeholder="@abingtonfriends.net">
+
+		        <label for="checkin-field-verify" class="pure-checkbox">
+		            <input id="checkin-field-verify" type="checkbox"> Please confirm that you are checking in loaner <span id="checkin-cbno-confirm">CB#</span>
+		        </label>
+
+		        <button type="submit" class="pure-button pure-button-primary">Next</button>
+		    </fieldset>
+		</form>
+	</div>
+	<div class="view" id="check-out">
+		<button class="pure-button back-button">Back</button>
+		<form class="pure-form pure-form-aligned" id="check-out-form" autocomplete="off">
+		    <fieldset>
+		        <legend>Chromebook Check-Out Form</legend>
+
+		        <label for="checkout-field-email">Email</label>
+		        <input id="checkout-field-email" type="text" placeholder="@abingtonfriends.net" autocomplete="off">
+		        <br><br>
+				<label for="checkout-field-loanerno">Loaner #</label>
+		        <select id="checkout-field-loanerno">
+					<option selected disabled>Select</option>
+		        </select>
+
+		        <label for="checkout-field-repair" class="pure-checkbox">
+		            <input id="checkout-field-repair" type="checkbox"> Please check this box if your Chromebook is being sent in for repairs.
+		        </label>
+
+		        <button type="submit" class="pure-button pure-button-primary">Check Out</button>
+		    </fieldset>
+		</form>
+	</div>
+	<div class="view" id="confirmation">
+		<h3>Chromebook checked <span id="confirm-inout">IN/OUT</span> successfully.</h3>
+		<p id="confirm-dateline">You must return your loaner by <span id="confirm-datestamp">Sunday, January 1, 1970</span>.</p>
+		<button class="pure-button" id="confirm-return-home">Done</button>
+	</div>
+	<script src="vendor/gapi.js"></script>
+	<script src="vendor/sweetalert2.js"></script>
+	<script src="vendor/jquery.min.js"></script>
+	<script src="js/globals.js"></script>
+	<script src="js/textUtils.js"></script>
+	<script src="js/gapiUtils.js"></script>
+	<script src="js/viewManagement.js"></script>
+	<script src="js/checkOut.js"></script>
+	<script src="js/checkIn.js"></script>
+	<script src="js/script.js"></script>
+  </body>
+</html>

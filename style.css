@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+body, html {
+    margin: 0;
+    padding: 0;
+}
+.view {
+	text-align: center;
+	width: 70vw;
+	margin: 0 auto;
+	margin-top: 2em;
+	border: 1px solid gray;
+	padding: 5em;
+}
+.back-button {
+	position: absolute;
+	left: 15vw;
+	top: 15vh;
+}
+#overlay {
+    z-index: 10000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.4);
+    color: white;
+    text-align: center;
+    font-size: 10em;
+}
+#overlay div {
+  position: absolute;
+  top: calc(50% - 11em);;
+  left: calc(50% - 5.5em);
+}
+
+/* overrides */
+.pure-form input[type=text][disabled] {
+    color: black !important;
+}
+
+/* button styles */
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}

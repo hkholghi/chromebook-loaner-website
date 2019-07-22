@@ -1,7 +1,7 @@
 // GAPI stuff
-const SPREADSHEET_ID = '1-df4sBEvoruJ1gfDAoM8KxuT-punZVM_I6hn3n4s8eg'
-const API_KEY = 'AIzaSyBQlD8VlVSSCM7R7Ee28cTCfmeMD8k6qqI'
-const CLIENT_ID = '959881065666-i18jd0f3fquldpskckv5cbnv3r2kvd1u.apps.googleusercontent.com'
+const SPREADSHEET_ID = '1HUE5eJoR2X1UYEm2VWyLYliN-5Kxi2FyfuZAE_B9t9Q'
+const API_KEY = 'AIzaSyCyrIqqxhCCKjf3GV8sZ9QOJzlM-ALvE6s'
+const CLIENT_ID = '571797694864-673e0adnaejd7n995j0t7pfpo2js3868.apps.googleusercontent.com'
 
 // timer to detect inactivity—we'll bounce back to the start screen after 1 minute
 // this has the happy side effect of also running refresh() every minute

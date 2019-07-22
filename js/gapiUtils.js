@@ -27,7 +27,7 @@ function updateSignInStatus (isSignedIn) {
 // Fetch
 function getLoanerSheet () {
   return gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1-df4sBEvoruJ1gfDAoM8KxuT-punZVM_I6hn3n4s8eg',
+    spreadsheetId: SPREADSHEET_ID,
     range: "'sheet1'!A2:D100"
   })
 }

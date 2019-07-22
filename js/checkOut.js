@@ -23,7 +23,7 @@ function checkOut () {
   
   const params = {
     spreadsheetId: SPREADSHEET_ID,
-    range: `'sheet1'!B${toCheckOut.row}:D${toCheckOut.row}`,
+    range: `!B${toCheckOut.row}:D${toCheckOut.row}`,
     valueInputOption: 'USER_ENTERED'
   }
   const body = {

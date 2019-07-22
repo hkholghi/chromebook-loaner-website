@@ -27,7 +27,7 @@ function checkIn () {
 	    }
 	    const params = {
 	        spreadsheetId: SPREADSHEET_ID,
-	        range: `'sheet1'!B${checkInEntry.row}:D${checkInEntry.row}`,
+	        range: `!B${checkInEntry.row}:D${checkInEntry.row}`,
 	        valueInputOption: 'USER_ENTERED'
 	    }
 	    const body = {

@@ -35,7 +35,7 @@ function checkOut () {
   if (isRepair) {
     $('#confirm-dateline').hide()
   } else {
-    date.setDate(date.getDate() + 2)
+    date.setDate(date.getDate() + ALLOWABLE_CHECKOUT_TIME_DAYS)
     if (date.getDay() > 5) { // it's a weekend—kick to Monday
     date.setDate(date.getDate() + (7 - date.getDay() + 1))
   }

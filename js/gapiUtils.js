@@ -8,8 +8,6 @@ function initGAPI () {
   }).then(() => {
     gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus)
     updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
-    $('#overlay').hide()
-    showView('start')
   }).catch((errorObj) => {
     $('#overlay').hide()
     Swal.fire({
@@ -19,8 +17,14 @@ function initGAPI () {
   })
 }
 function updateSignInStatus (isSignedIn) {
+  $('#overlay').hide()
   if (!isSignedIn) {
-    gapi.auth2.getAuthInstance().signIn()
+    showView(null)
+    Swal.fire('Click OK to trigger sign in')
+      .then(() => gapi.auth2.getAuthInstance().signIn())
+      .then(() => showView('start'))
+  } else {
+    showView('start')
   }
 }
 

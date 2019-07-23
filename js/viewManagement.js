@@ -18,19 +18,20 @@ function showView (view) {
 
 // fetches spreadsheet data and updates the inventory and picker UI
 function refresh () {
-  inventory = []
-  checkInEntry = {}
-  $('input[type="text"]').val('').prop('disabled', false)
-  $('input[type="checkbox"]').prop('checked', false)
-  $('#check-in-form button').text('Next')
-  $('#confirm-datestamp').text('')
-  $('#confirm-dateline').show()
-  $('#confirm-inout').text('')
-
-  let $select = $('#checkout-field-loanerno')
-  $select.children(':not(:disabled)').remove()
-  $select.children('option:disabled').prop('selected', true)
   getLoanerSheet().then((response) => {
+    inventory = []
+    checkInEntry = {}
+    $('input[type="text"]').val('').prop('disabled', false)
+    $('input[type="checkbox"]').prop('checked', false)
+    $('#check-in-form button').text('Next')
+    $('#confirm-datestamp').text('')
+    $('#confirm-dateline').show()
+    $('#confirm-inout').text('')
+
+    let $select = $('#checkout-field-loanerno')
+    $select.children(':not(:disabled)').remove()
+    $select.children('option:disabled').prop('selected', true)
+
     for (let i = 0; i < response.result.values.length; ++i) {
       const rowArr = response.result.values[i]
       const cbNo = rowArr[0]

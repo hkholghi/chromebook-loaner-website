@@ -37,7 +37,7 @@ function checkOut () {
   } else {
     date.setDate(date.getDate() + ALLOWABLE_CHECKOUT_TIME_DAYS)
     if (date.getDay() > 5) { // it's a weekend—kick to Monday
-    date.setDate(date.getDate() + (7 - date.getDay() + 1))
+    date.setDate(date.getDate() + (date.getDay() === 0 ? 1 : 2))
   }
   const retDateStr = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   $('#confirm-datestamp').text(retDateStr)

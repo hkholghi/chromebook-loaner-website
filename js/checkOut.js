@@ -15,7 +15,7 @@ function checkOut () {
     return
   }
   const isRepair = $('#checkout-field-repair')[0].checked
-  
+
   const toCheckOut = inventory.find(el => el.cbNumber === loaner)
 
   if (toCheckOut === undefined) {
@@ -25,7 +25,7 @@ function checkOut () {
   // reusable date object
   // we'll use it for the cur locate str for the spreadsheet, and then again to compute return date
   const date = new Date()
-  
+
   const params = {
     spreadsheetId: SPREADSHEET_ID,
     range: `!B${toCheckOut.row}:D${toCheckOut.row}`,
@@ -34,7 +34,7 @@ function checkOut () {
   const body = {
     values: [[email, isRepair ? 'TRUE' : 'FALSE', date.toLocaleDateString()]]
   }
-  
+
   // prep confirm screen
   $('#confirm-inout').text('out')
   if (isRepair) {
@@ -42,10 +42,10 @@ function checkOut () {
   } else {
     date.setDate(date.getDate() + ALLOWABLE_CHECKOUT_TIME_DAYS)
     if (date.getDay() > 5) { // it's a weekend—kick to Monday
-    date.setDate(date.getDate() + (date.getDay() === 0 ? 1 : 2))
+      date.setDate(date.getDate() + (date.getDay() === 0 ? 1 : 2))
+    }
+    const retDateStr = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+    $('#confirm-datestamp').text(retDateStr)
   }
-  const retDateStr = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-  $('#confirm-datestamp').text(retDateStr)
-}
-updateSheet(params, body)
+  updateSheet(params, body)
 }

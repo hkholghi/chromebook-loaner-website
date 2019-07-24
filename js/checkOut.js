@@ -22,30 +22,21 @@ function checkOut () {
     Swal.fire('The specified loaner does not exist. Please ask a member of the tech department for assistance.')
     return
   }
-  // reusable date object
-  // we'll use it for the cur locate str for the spreadsheet, and then again to compute return date
-  const date = new Date()
-
+  // date for the cur locale str for the spreadsheet
+  const today = new Date()
   const params = {
     spreadsheetId: SPREADSHEET_ID,
     range: `!B${toCheckOut.row}:D${toCheckOut.row}`,
     valueInputOption: 'USER_ENTERED'
   }
   const body = {
-    values: [[email, isRepair ? 'TRUE' : 'FALSE', date.toLocaleDateString()]]
+    values: [[email, isRepair ? 'TRUE' : 'FALSE', today.toLocaleDateString()]]
   }
 
   // prep confirm screen
   $('#confirm-inout').text('out')
   if (isRepair) {
     $('#confirm-dateline').hide()
-  } else {
-    date.setDate(date.getDate() + ALLOWABLE_CHECKOUT_TIME_DAYS)
-    if (date.getDay() > 5) { // it's a weekend—kick to Monday
-      date.setDate(date.getDate() + (date.getDay() === 0 ? 1 : 2))
-    }
-    const retDateStr = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-    $('#confirm-datestamp').text(retDateStr)
   }
   updateSheet(params, body)
 }

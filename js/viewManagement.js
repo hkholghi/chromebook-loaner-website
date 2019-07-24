@@ -54,6 +54,9 @@ function refresh () {
         })
       }
     }
+  }, errorResp => {
+    const err = errorResp.result.error
+    Swal.fire({ title: 'Error Fetching Spreadsheet', text: `[${err.code}: ${err.status}] ${err.message}` })
   })
 }
 

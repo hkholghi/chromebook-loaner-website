@@ -17,6 +17,11 @@ function checkOut () {
   const isRepair = $('#checkout-field-repair')[0].checked
   
   const toCheckOut = inventory.find(el => el.cbNumber === loaner)
+
+  if (toCheckOut === undefined) {
+    Swal.fire('The specified loaner does not exist. Please ask a member of the tech department for assistance.')
+    return
+  }
   // reusable date object
   // we'll use it for the cur locate str for the spreadsheet, and then again to compute return date
   const date = new Date()

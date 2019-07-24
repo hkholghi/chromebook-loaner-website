@@ -1,7 +1,8 @@
 function checkIn () {
   const $submitButton = $('#check-in-form button')
   if ($submitButton.text() === 'Next') {
-    const email = getAFSEmail($('#checkin-email').val())
+    const $emailField = $('#checkin-email')
+    const email = getAFSEmail($emailField.val())
     if (email === null) {
       Swal.fire('You must enter a valid AFS email or username')
       return
@@ -13,7 +14,7 @@ function checkIn () {
     }
     $('#checkin-cbno-confirm').text(curCheckedOut.cbNumber)
     $('label[for="checkin-field-verify"]').show()
-    $('#checkin-email').prop('disabled', true)
+    $emailField.prop('disabled', true)
     checkInEntry = curCheckedOut
     $submitButton.text('Check In')
   } else {

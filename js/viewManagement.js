@@ -23,7 +23,7 @@ function refresh () {
     $('input[type="checkbox"]').prop('checked', false)
     $('#check-in-form button').text('Next')
     $('#checkin-cbno-confirm').text('')
-    $('#checkin-field-verify').hide()
+    $('#checkin-field-verify-container').hide()
     $('#confirm-datestamp').text('')
     $('#confirm-dateline').show()
     $('#confirm-inout').text('')

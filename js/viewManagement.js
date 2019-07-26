@@ -1,19 +1,17 @@
-// shows the specified view, hides the rest; null hides all views
-function showView (view) {
-  if (view === null) {
-    $('.view').hide()
-    return
-  }
-  if (view === 'start') {
-    refresh()
-  } else if (view === 'check-in') {
-    $('label[for="checkin-field-verify"]').hide()
-  }
+// shows the specified card view, hides the rest
+function showCardReveal () {
+  $('#hidden-activator').click()
+  M.AutoInit()
+}
 
-  const toHide = $(`.view:not(#${view})`)
-  const toShow = $(`#${view}`)
-  toHide.hide()
-  toShow.show()
+function showCardView (id) {
+  $(`.card-reveal-container:not(#${id})`).hide()
+  $(`#${id}`).show()
+}
+
+function showMain () {
+  $('#hidden-card-title').click()
+  refresh()
 }
 
 // fetches spreadsheet data and updates the inventory and picker UI
@@ -24,6 +22,8 @@ function refresh () {
     $('input[type="text"]').val('').prop('disabled', false)
     $('input[type="checkbox"]').prop('checked', false)
     $('#check-in-form button').text('Next')
+    $('#checkin-cbno-confirm').text('')
+    $('#checkin-field-verify').hide()
     $('#confirm-datestamp').text('')
     $('#confirm-dateline').show()
     $('#confirm-inout').text('')
@@ -63,6 +63,6 @@ function refresh () {
 // resets the return-to-start timer on user activity
 function resetTimer () {
   clearTimeout(idleTimer)
-  idleTimer = setTimeout(() => { showView('start') }, 60000)
+  idleTimer = setTimeout(() => { showMain() }, 60000)
 }
 

@@ -1,81 +1,124 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="vendor/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="vendor/loader.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendor/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="vendor/loader.css">
     <title>Chromebook Loaners</title>
-  </head>
-  <body>
-    <div id="overlay"><div class="loader"></div></div>
-  	<div class="view" id="start">
-		<h1>Chromebook Loaner Check-In/Out</h1>
-		<div class="pure-g">
-		    <div class="pure-u-1-4"></div>
-		    <div class="pure-u-1-4">
-				<button class="pure-button button-secondary" id="start-check-out">Check out a loaner</button>
-		    </div>
-		    <div class="pure-u-1-4">
-				<button class="pure-button button-success" id="start-check-in">Check in a loaner</button>
-		    </div>
-		    <div class="pure-u-1-4"></div>
-		</div>
-	</div>
-	<div class="view" id="check-in">
-		<button class="pure-button back-button">Back</button>
-		<form class="pure-form pure-form-aligned" id="check-in-form" autocomplete="off">
-		    <fieldset>
-		        <legend>Chromebook Check-In Form</legend>
-
-		        <label for="checkin-email" autocomplete="off">Email:</label>
-		        <input id="checkin-email" type="text"><span>@abingtonfriends.net</span>
-						<br><br>
-		        <label for="checkin-field-verify" class="pure-checkbox">
-		            <input id="checkin-field-verify" type="checkbox"> Please confirm that you are checking in loaner <span id="checkin-cbno-confirm">CB#</span>
-		        </label>
-
-		        <button type="submit" class="pure-button pure-button-primary">Next</button>
-		    </fieldset>
-		</form>
-	</div>
-	<div class="view" id="check-out">
-		<button class="pure-button back-button">Back</button>
-		<form class="pure-form pure-form-aligned" id="check-out-form" autocomplete="off">
-		    <fieldset>
-		        <legend>Chromebook Check-Out Form</legend>
-
-		        <label for="checkout-field-email">Email:</label>
-		        <input id="checkout-field-email" type="text" autocomplete="off"><span>@abingtonfriends.net</span>
-		        <br><br>
-				<label for="checkout-field-loanerno">Loaner #:</label>
-		        <select id="checkout-field-loanerno">
-					<option selected disabled>Select</option>
-		        </select>
-
-		        <label for="checkout-field-repair" class="pure-checkbox">
-		            <input id="checkout-field-repair" type="checkbox"> Please check this box if your Chromebook is being sent in for repairs.
-		        </label>
-
-		        <button type="submit" class="pure-button pure-button-primary">Check Out</button>
-		    </fieldset>
-		</form>
-	</div>
-	<div class="view" id="confirmation">
-		<h3>Chromebook checked <span id="confirm-inout">IN/OUT</span> successfully.</h3>
-		<p id="confirm-dateline">You must return your loaner by 3:00 p.m. today.</p>
-		<button class="pure-button" id="confirm-return-home">Done</button>
-	</div>
-	<script src="vendor/gapi.js"></script>
-	<script src="vendor/sweetalert2.js"></script>
-	<script src="vendor/jquery.min.js"></script>
-	<script src="js/globals.js"></script>
-	<script src="js/textUtils.js"></script>
-	<script src="js/gapiUtils.js"></script>
-	<script src="js/viewManagement.js"></script>
-	<script src="js/checkOut.js"></script>
-	<script src="js/checkIn.js"></script>
-	<script src="js/script.js"></script>
-  </body>
+</head>
+<body>
+<div id="overlay"><div class="loader"></div></div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card" id="main-card">
+                <div class="card-content">
+                    <span class="card-title-actionless grey-text text-darken-4 center">Chromebook Loaner Check-In/Out</span>
+                </div>
+                <div class="card-action">
+                    <button style="display: none" class="activator" id="hidden-activator"></button>
+                    <div class="row center">
+                        <div class="col s2"></div>
+                        <div class="col s4">
+                            <a class="waves-effect waves-light btn blue" id="start-check-out"><i class="material-icons left">unarchive</i>Check out a loaner</a>
+                        </div>
+                        <div class="col s4">
+                            <a class="waves-effect waves-light btn green" id="start-check-in"><i class="material-icons left">where_to_vote</i>Check in a loaner</a>
+                        </div>
+                        <div class="col s2"></div>
+                    </div>
+                </div>
+                <div class="card-reveal" id="main-card-reveal">
+                    <span class="card-title hidden" id="hidden-card-title"></span>
+                    <div class="card-reveal-container hidden" id="check-in-form-container">
+                        <span class="card-title-actionless grey-text text-darken-4">Chromebook Check-In Form<i class="material-icons right">close</i></span>
+                        <div class="row">
+                            <form class="col s12" id="check-in-form" autocomplete="off">
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <input id="checkin-field-email" type="text" autocomplete="off">
+                                        <label for="checkin-field-email">AFS Email Address</label>
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <p>@abingtonfriends.net</p>
+                                    </div>
+                                    <div class="col s12 hidden" id="checkin-field-verify-container">
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" id="checkin-field-verify">
+                                                <span>Please confirm that you are checking in loaner <span id="checkin-cbno-confirm">CB#</span></span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button type="submit" class="waves-effect waves-light btn-small">Next</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-reveal-container hidden" id="check-out-form-container">
+                        <span class="card-title-actionless grey-text text-darken-4">Chromebook Check-Out Form<i class="material-icons right">close</i></span>
+                        <div class="row">
+                            <form class="col s12" id="check-out-form" autocomplete="off">
+                                <div class="row">
+                                    <div class="input-field col s4">
+                                        <input id="checkout-field-email" type="text" autocomplete="off">
+                                        <label for="checkout-field-email">AFS Email Address</label>
+                                    </div>
+                                    <div class="input-field col s8">
+                                        <p>@abingtonfriends.net</p>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <select id="checkout-field-loanerno">
+                                            <option selected disabled>Select</option>
+                                        </select>
+                                        <label for="checkout-field-loanerno">Loaner Number</label>
+                                    </div>
+                                    <div class="col s12">
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" id="checkout-field-repair">
+                                                <span>Please check this box if your Chromebook is being sent in for repairs.</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button type="submit" class="waves-effect waves-light btn-small">Check Out</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-reveal-container hidden" id="success-container">
+                        <span class="card-title-actionless grey-text text-darken-4">Chromebook checked <span id="confirm-inout">IN/OUT</span> successfully.<i class="material-icons right">close</i></span>
+                        <div class="row">
+                            <div class="col s12">
+                                <p id="confirm-dateline">You must return your loaner by 3:00 p.m. today.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="vendor/materialize.min.js"></script>
+<script src="vendor/gapi.js"></script>
+<script src="vendor/sweetalert2.js"></script>
+<script src="vendor/jquery.min.js"></script>
+<script src="js/globals.js"></script>
+<script src="js/gapiUtils.js"></script>
+<script src="js/viewManagement.js"></script>
+<script src="js/checkOut.js"></script>
+<script src="js/checkIn.js"></script>
+<script src="js/script.js"></script>
+</body>
 </html>

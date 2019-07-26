@@ -1,7 +1,8 @@
 function checkIn () {
   const $submitButton = $('#check-in-form button')
   if ($submitButton.text() === 'Next') {
-    const $emailField = $('#checkin-email')
+    // Check-in phase 1: verify the email is valid and find the associated loaner
+    const $emailField = $('#checkin-field-email')
     const email = getAFSEmail($emailField.val())
     if (email === null) {
       Swal.fire('You must enter a valid AFS email or username')
@@ -13,11 +14,12 @@ function checkIn () {
       return
     }
     $('#checkin-cbno-confirm').text(curCheckedOut.cbNumber)
-    $('label[for="checkin-field-verify"]').show()
+    $('#checkin-field-verify-container').show()
     $emailField.prop('disabled', true)
     checkInEntry = curCheckedOut
     $submitButton.text('Check In')
   } else {
+    // Check-in phase 2: have user verify CB number and complete check-in
     if (!($('#checkin-field-verify')[0].checked)) {
       Swal.fire('Please verify the number of the Chromebook you are returning')
       return
@@ -28,9 +30,10 @@ function checkIn () {
     }
     const params = {
       spreadsheetId: SPREADSHEET_ID,
-      range: `!B${checkInEntry.row}:D${checkInEntry.row}`,
+      range: `B${checkInEntry.row}:D${checkInEntry.row}`,
       valueInputOption: 'USER_ENTERED'
     }
+    // set the spreadsheet row to empty, unchecked checkbox, empty (CB no. persists in col 1)
     const body = {
       values: [['', 'FALSE', '']]
     }

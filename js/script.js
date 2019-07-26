@@ -1,8 +1,6 @@
 /* eslint-env jquery */
 
-showView(null)
-
-// set up idle timer and null view on load
+// set up idle timer and gapi on load
 $(document).ready(function () {
   gapi.load('client:auth2', initGAPI)
   $(this).mousemove(resetTimer)
@@ -11,18 +9,16 @@ $(document).ready(function () {
 
 // map all the buttons
 $('#start-check-in').click(() => {
-  showView('check-in')
+  showCardView('check-in-form-container')
+  showCardReveal()
 })
 $('#start-check-out').click(() => {
-  showView('check-out')
+  showCardView('check-out-form-container')
+  showCardReveal()
 })
-$('.back-button').click(() => {
-  showView('start')
+$('.card-title-actionless i').click(() => {
+  showMain()
 })
-$('#confirm-return-home').click(() => {
-  showView('start')
-})
-
 $('#check-out-form').submit(function (e) {
   e.preventDefault()
   checkOut()
@@ -32,7 +28,3 @@ $('#check-in-form').submit(function (e) {
   e.preventDefault()
   checkIn()
 })
-
-function getCheckedOutByEmail (email) {
-  return inventory.find(el => el.email === email)
-}

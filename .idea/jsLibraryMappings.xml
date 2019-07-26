@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{@types/gapi, @types/gapi.auth2, @types/gapi.client.sheets, @types/jquery, @types/materialize-css}" />
+  </component>
+</project>

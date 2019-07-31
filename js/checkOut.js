@@ -35,7 +35,7 @@ function checkOut () {
     const today = new Date()
     const params = {
       spreadsheetId: SPREADSHEET_ID,
-      range: `!B${toCheckOut.row}:D${toCheckOut.row}`,
+      range: `B${toCheckOut.row}:D${toCheckOut.row}`,
       valueInputOption: 'USER_ENTERED'
     }
     const body = {

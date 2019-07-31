@@ -28,7 +28,7 @@ function checkOut () {
   }
 
   // make sure that the email address is valid—this takes a bit, so start the overlay now
-  $('#overlay').fadeIn(100)
+  $('#overlay').show()
 
   getUserInDirectory(email).then(function (goodResponse) {
     // date for the cur locale str for the spreadsheet

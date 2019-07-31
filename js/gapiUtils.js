@@ -67,12 +67,12 @@ function getLoanerSheet () {
 
 // Write
 function updateSheet (params, body) {
-  $('#overlay').fadeIn(100)
+  $('#overlay').show()
   gapi.client.sheets.spreadsheets.values.update(params, body).then(function (goodResponse) {
-    $('#overlay').fadeOut(100)
+    $('#overlay').hide()
     showCardView('success-container')
   }, function (errorResponse) {
-    $('#overlay').fadeOut(100)
+    $('#overlay').hide()
     const error = errorResponse.result.error
     Swal.fire({
       title: 'An error occurred updating the spreadsheet. Please provide the following information to the Tech Department:',

@@ -11,20 +11,42 @@ function initGAPI () {
   }).catch((errorObj) => {
     $('#overlay').hide()
     Swal.fire({
-      title: 'Unable to Authenticate GAPI',
+      title: 'Unable to Initialize GAPI',
       text: `[${errorObj.error}] ${errorObj.details}`
-    })
+    }).then(showGAPIForceRefreshDialog)
   })
 }
 function updateSignInStatus (isSignedIn) {
-  $('#overlay').hide()
+  const $overlay = $('#overlay')
+  $overlay.hide()
   if (!isSignedIn) {
     Swal.fire('Click OK to trigger sign in')
-      .then(() => gapi.auth2.getAuthInstance().signIn())
-      .then(() => showMain())
+      .then(() => {
+        $overlay.show()
+        return gapi.auth2.getAuthInstance().signIn()
+      })
+      .then(() => {
+          showMain()
+          $overlay.hide()
+        },
+        (errorObj) => {
+          $overlay.hide()
+          Swal.fire({
+            title: 'Google Authentication Failed',
+            text: `The following error occurred: ${errorObj.error}`,
+          }).then(showGAPIForceRefreshDialog())
+        })
   } else {
     showMain()
   }
+}
+
+function showGAPIForceRefreshDialog () {
+  Swal.fire({
+    title: 'A Fatal Google API Error Has Occurred',
+    text: 'Either user authentication failed or the API could not be initialized. Please reload the page by clicking below to try again.',
+    confirmButtonText: 'Reload'
+  }).then(() => { window.location.reload() })
 }
 
 // Check users with Directory API

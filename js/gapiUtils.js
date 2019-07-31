@@ -46,7 +46,7 @@ function showGAPIForceRefreshDialog () {
     title: 'A Fatal Google API Error Has Occurred',
     text: 'Either user authentication failed or the API could not be initialized. Please reload the page by clicking below to try again.',
     confirmButtonText: 'Reload'
-  }).then(() => { window.location.reload() })
+  }).then(() => { window.location.reload(true) })
 }
 
 // Check users with Directory API

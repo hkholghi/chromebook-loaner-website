@@ -34,7 +34,7 @@ function updateSignInStatus (isSignedIn) {
           Swal.fire({
             title: 'Google Authentication Failed',
             text: `The following error occurred: ${errorObj.error}`,
-          }).then(showGAPIForceRefreshDialog())
+          }).then(showGAPIForceRefreshDialog)
         })
   } else {
     showMain()
